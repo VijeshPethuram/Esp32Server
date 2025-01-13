@@ -1,35 +1,31 @@
-// index.js
+
 
 const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = 3000; // Port number for the application
+const PORT = 3000; 
 
-// Use body-parser middleware to parse JSON requests
 app.use(bodyParser.json());
 
-let patients = {}; // In-memory store for patient data
+let patients = {}; 
 
-// Endpoint to add a new patient
 app.post('/patients', (req, res) => {
     const { id, name, age, condition } = req.body;
-
-    // Check if patient with the same ID already exists
     if (patients[id]) {
         return res.status(400).json({ message: 'Patient with this ID already exists.' });
     }
 
-    // Add patient data to the dictionary
+    
     patients[id] = { name, age, condition };
     return res.status(201).json({ message: 'Patient added successfully.', patient: patients[id] });
 });
 
-// Endpoint to retrieve patient data by ID
+
 app.get('/patients/:id', (req, res) => {
     const { id } = req.params;
 
-    // Check if the patient exists
+    
     if (!patients[id]) {
         return res.status(404).json({ message: 'Patient not found.' });
     }
