@@ -31,14 +31,13 @@ app.get('/patients/:id', (req, res) => {
     }
 
     return res.status(200).json(patients[id]);
-});
+})
 
-// Endpoint to retrieve all patients
 app.get('/patients', (req, res) => {
     return res.status(200).json(patients);
 });
 
-// Start the server
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
